@@ -8,12 +8,14 @@ jobs:
     docker:
       - image: circleci/ruby:2.7.5-node-browsers-legacy
       - image: redis
-    executor: ruby/default
     steps:
       - checkout
       - run:
           name: Install Dependencies
-          command: yarn install --ignore-platform && yarn build
+          command: yarn install --ignore-platform --ignore-engines && yarn build
+      - run:
+          name: Install mongo gem
+          command: gem install mongo -v '~> 2.22'
       - run:
           name: Install mongo gem
           command: gem install mongo -v '~> 2.22'
@@ -33,13 +35,15 @@ jobs:
           path: ./tmp/screenshots
   publish:
     docker:
-      - image: circleci/ruby:2.6.6-stretch-node-browsers
-    executor: ruby/default
+      - image: cimg/ruby:3.2-node
     steps:
       - checkout
       - run:
           name: Install Dependencies
-          command: yarn install --immutable
+          command: yarn install --ignore-engines
+      - run:
+          name: Install mongo gem
+          command: gem install mongo -v '~> 2.22'
       - run:
           name: Install mongo gem
           command: gem install mongo -v '~> 2.22'
