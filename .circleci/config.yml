@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@2.7.5
+  ruby: circleci/ruby@2.6.0
   # circleci/ruby@2.6.0
   # https://circleci.com/developer/orbs?query=ruby&page=1&pageSize=15
 jobs:
