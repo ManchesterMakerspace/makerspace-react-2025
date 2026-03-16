@@ -1,11 +1,12 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@2.1.4
-
+  ruby: circleci/ruby@2.7.5
+  # circleci/ruby@2.6.0
+  # https://circleci.com/developer/orbs?query=ruby&page=1&pageSize=15
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.2-node
+      - image: circleci/ruby:2.7.5-node-browsers-legacy
       - image: redis
     steps:
       - checkout
@@ -15,6 +16,12 @@ jobs:
       - run:
           name: Install mongo gem
           command: gem install mongo -v '~> 2.22'
+      - run:
+          name: Install mongo gem
+          command: gem install mongo -v '~> 2.22'
+      - run:
+          name: Install bundler gem
+          command: gem install bundler:1.17.3
       - run:
           name: UT
           command: yarn test
@@ -37,6 +44,12 @@ jobs:
       - run:
           name: Install mongo gem
           command: gem install mongo -v '~> 2.22'
+      - run:
+          name: Install mongo gem
+          command: gem install mongo -v '~> 2.22'
+      - run:
+          name: Install bundler gem
+          command: gem install bundler:1.17.3
       - run:
           name: deploy
           command: |
